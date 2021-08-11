@@ -24,13 +24,3 @@ def nana():
     print("오빠")
     print("내가 한거야")
 nana()
-nana()
-nana()
-nana()
-nana()
-nana()
-nana()
-nana()
-nana()
-nana()
-
