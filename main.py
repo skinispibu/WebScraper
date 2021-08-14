@@ -60,10 +60,49 @@
 # print(nana_2)
 
 # # #Lists in python 2021/08/13
-def plus(a, b):
-    if type(b) is int or type(b) is float:
-        return a+b
-    else:
-      return None
+# def plus(a, b):
+#     if type(b) is int or type(b) is float:
+#         return a+b
+#     else:
+#       return None
 
-print(plus(3, 4.5))
+# plus(3, 4.5)
+
+# List in python 2021/08/14
+def age_check(age):
+    print(f"you are {age}")
+    if age < 18:
+        print("you can't drink")
+    elif age ==18 or age ==19:
+        print("you are new to this!")
+    elif age >20 and age < 25:
+        print("you are still kind of young")
+    else:
+        print("enjoy your drink")
+
+age_check(17)
+
+days = ("Mon", "Tue", "Wed", "Thu", "Fri")
+
+for love in days:
+    if love is "Wed":
+        break
+    else:
+        print(love)
+
+for letter in "hagyeong":
+    print(letter)
+
+# Modules are math function.
+import math
+
+print(math.ceil(1.1))
+print(math.fabs(-4.5))
+
+from math import fsum as love_sum
+
+print(love_sum([1, 2, 3, 4, 5, 6]))
+
+from caculator import plus, minus
+
+print(plus(1,2), minus(4,6))
