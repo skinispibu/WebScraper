@@ -114,3 +114,19 @@ indeed_result = requests.get ("https://kr.indeed.com/jobs?q=python&limit=50")
 
 print(indeed_result.text)
 #html 가져오기 끝
+
+#List in python 2021/08/16
+import requests
+from bs4 import BeautifulSoup
+
+indeed_result = requests.get("https://www.indeed.com/jobs?as_and=python&limit=50")
+
+indeed_soup = BeautifulSoup(indeed_result.text, "htmlparser")
+
+pagination = indeed_soup.find("div", {"class":"pagination"})
+
+pages = pagination.find_all('a')
+spans = []
+for page in pages
+  spans.append(page.find("span"))
+span = spans[:-1]
