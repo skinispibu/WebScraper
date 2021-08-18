@@ -132,18 +132,46 @@
 # span = spans[:-1]
 
 #List in python 2021/08/17
+# import requests
+# from bs4 import BeautifulSoup
+
+# indeed_result = requests.get("https://www.indeed.com/jobs?as_and=python&limit=50")
+
+# indeed_soup = BeautifulSoup(indeed_result.text, "htmlparser")
+
+# pagination = indeed_soup.find("div", {"class":"pagination"})
+
+# links = pagination.find_all('a')
+# pages = []
+# for link in links[:-1]:
+#   pages.append(int(link.string))
+  
+# max_page = pages[-1]
+
+#List in python 2021/08/18
 import requests
 from bs4 import BeautifulSoup
 
-indeed_result = requests.get("https://www.indeed.com/jobs?as_and=python&limit=50")
+LIMIT = 50
+URL = f "https://www.indeed.com/jobs?as_and=python&limit={LIMIT}"
 
-indeed_soup = BeautifulSoup(indeed_result.text, "htmlparser")
+def exract_indeed_pages():
+ result = requests.get(URL)
 
-pagination = indeed_soup.find("div", {"class":"pagination"})
+ soup = BeautifulSoup(result.text, "htmlparser")
 
-links = pagination.find_all('a')
-pages = []
-for link in links[:-1]:
-  pages.append(int(link.string))
-  
-max_page = pages[-1]
+  pagination = soup.find("div", {"class":"pagination"})
+
+  links = pagination.find_all('a')
+  pages = []
+  for link in links[:-1]:
+    pages.append(int(link.string))
+
+  max_page = pages[-1]
+  return max_page
+
+def extract_indeed_jobs(last_page):
+  for page in range(last_page):
+    result = requests.get(f "{URL}&start={page*LIMIT}") 
+    print(result.status_code)
+
