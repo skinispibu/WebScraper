@@ -11,7 +11,7 @@
 # # "korean" : True,
 # # "fav_food": ["떡볶이","불닭"]}
 # # print(하경)
-# # 하경["pretty"] = True 
+# # 하경["pretty"] = True
 # # print(하경)
 
 # # age = "17"
@@ -44,7 +44,7 @@
 # nana()
 
 # def p_plus(a,b):
-#     print(a+b) 
+#     print(a+b)
 
 # def r_plus(a,b):
 #     return a+b
@@ -107,7 +107,7 @@
 
 # print(plus(1,2), minus(4,6))
 
-#List in python 2021/08/15
+# List in python 2021/08/15
 # import requests
 
 # indeed_result = requests.get ("https://kr.indeed.com/jobs?q=python&limit=50")
@@ -115,7 +115,7 @@
 # print(indeed_result.text)
 # #html 가져오기 끝
 
-#List in python 2021/08/16
+# List in python 2021/08/16
 # import requests
 # from bs4 import BeautifulSoup
 
@@ -131,7 +131,7 @@
 #   spans.append(page.find("span"))
 # span = spans[:-1]
 
-#List in python 2021/08/17
+# List in python 2021/08/17
 # import requests
 # from bs4 import BeautifulSoup
 
@@ -145,10 +145,10 @@
 # pages = []
 # for link in links[:-1]:
 #   pages.append(int(link.string))
-  
+
 # max_page = pages[-1]
 
-#List in python 2021/08/18
+# List in python 2021/08/18
 # import requests
 # from bs4 import BeautifulSoup
 
@@ -172,10 +172,10 @@
 
 # def extract_indeed_jobs(last_page):
 #   for page in range(last_page):
-#     result = requests.get(f "{URL}&start={page*LIMIT}") 
+#     result = requests.get(f "{URL}&start={page*LIMIT}")
 #     print(result.status_code)
 
-#List in python 2021/08/19
+# List in python 2021/08/19
 # import requests
 # from bs4 import BeautifulSoup
 
@@ -200,7 +200,7 @@
 # def extract_indeed_jobs(last_page):
 #   jobs = []
 #   # for page in range(last_page):
-#   result = requests.get(f "{URL}&start={0*LIMIT}") 
+#   result = requests.get(f "{URL}&start={0*LIMIT}")
 #    soup = BeautifulSoup(result.text, "htmlparser")
 #   results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
 #   for result in results:
@@ -208,11 +208,11 @@
 #     print(title)
 #   return jobs
 
-#List in python 2021/08/20
+# List in python 2021/08/20
 # def extract_indeed_jobs(last_page):
 #   jobs = []
 #   # for page in range(last_page):
-#   result = requests.get(f "{URL}&start={0*LIMIT}") 
+#   result = requests.get(f "{URL}&start={0*LIMIT}")
 #    soup = BeautifulSoup(result.text, "htmlparser")
 #   results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
 #   for result in results:
@@ -224,37 +224,53 @@
 #     else:
 #       company = str(company.string)
 #     company = company.strip()
-#     print(title, company)  
-#   return jobs 
+#     print(title, company)
+#   return jobs
 
-#List in python 2021/08/21
-def extract_job(html):
-  title = reault.find_all("div", {"class":"title"}).find("a")["title"]
-    company = result.find("span",{"class": "company"})
-    company_anchor = company.find("a")
-    if company_anchor is not None:
-      company = str(company_anchor.string)
-    else:
-      company = str(company.string)
-    company = company.strip()
-    location = html.find("div", {"class": "recJobLoc"})["date-rc-loc"]
-    job_id = html["date-jk"]
-    return {
-      "title": title,
-      'company': company,
-      'location': location,
-      "link": f "https://www.indeed.com/viewjob?jk={job_id}"
-    }
+# List in python 2021/08/21
+# def extract_job(html):
+#   title = reault.find_all("div", {"class":"title"}).find("a")["title"]
+#     company = result.find("span",{"class": "company"})
+#     company_anchor = company.find("a")
+#     if company_anchor is not None:
+#       company = str(company_anchor.string)
+#     else:
+#       company = str(company.string)
+#     company = company.strip()
+#     location = html.find("div", {"class": "recJobLoc"})["date-rc-loc"]
+#     job_id = html["date-jk"]
+#     return {
+#       "title": title,
+#       'company': company,
+#       'location': location,
+#       "link": f "https://www.indeed.com/viewjob?jk={job_id}"
+#     }
 
-def extract_indeed_jobs(last_page):
-  jobs = []
-  for page in range(last_page):
-    print(f "Scrapping page {page")
-    result = requests.get(f "{URL}&start={page*LIMIT}") 
-    soup = BeautifulSoup(result.text, "htmlparser")
-    results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
-  for result in results:
-    job = extract_job(result)
-    jobs.append(job)
-  return jobs 
+# def extract_indeed_jobs(last_page):
+#   jobs = []
+#   for page in range(last_page):
+#     print(f "Scrapping page {page")
+#     result = requests.get(f "{URL}&start={page*LIMIT}")
+#     soup = BeautifulSoup(result.text, "htmlparser")
+#     results = soup.find_all("div", {"class":"jobsearch-SerpJobCard"})
+#   for result in results:
+#     job = extract_job(result)
+#     jobs.append(job)
+#   return jobs
 
+# List in python 2021/08/22
+import requests
+from bs4 import BeautifulSoup
+
+URL = f "https://stackoverfiow.com/jobs?q=python&sort=i"
+
+
+def get_last_page():
+    result = requests.get(URL)
+    soup = BeautifulSoup(result.text, "html.parser")
+    pages = soup.find("div", {"class": "pagination"}).find_all("a")
+    print(pages)
+
+    def get_jobs():
+        last_page = get_last_page()
+        return []
