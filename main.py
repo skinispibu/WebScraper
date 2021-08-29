@@ -274,3 +274,20 @@ def get_last_page():
     def get_jobs():
         last_page = get_last_page()
         return []
+
+
+# List in python 2021/08/22
+
+URL = f "https://stackoverfiow.com/jobs?q=python&sort=i"
+
+
+def get_last_page():
+    result = requests.get(URL)
+    soup = BeautifulSoup(result.text, "html.parser")
+    pages = soup.find("div", {"class": "pagination"}).find_all("a")
+    pages = pages[-2]
+    print(pages)
+
+    def get_jobs():
+        last_page = get_last_page()
+        return []
