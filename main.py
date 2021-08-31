@@ -259,8 +259,24 @@
 #   return jobs
 
 # List in python 2021/08/22
-import requests
-from bs4 import BeautifulSoup
+# import requests
+# from bs4 import BeautifulSoup
+
+# URL = f "https://stackoverfiow.com/jobs?q=python&sort=i"
+
+
+# def get_last_page():
+#     result = requests.get(URL)
+#     soup = BeautifulSoup(result.text, "html.parser")
+#     pages = soup.find("div", {"class": "pagination"}).find_all("a")
+#     print(pages)
+
+#     def get_jobs():
+#         last_page = get_last_page()
+#         return []
+
+
+# List in python 2021/08/31
 
 URL = f "https://stackoverfiow.com/jobs?q=python&sort=i"
 
@@ -269,25 +285,20 @@ def get_last_page():
     result = requests.get(URL)
     soup = BeautifulSoup(result.text, "html.parser")
     pages = soup.find("div", {"class": "pagination"}).find_all("a")
+    pages = pages[0:-2]
     print(pages)
+
+
+def extract_jobs(last_page):
+    jobs = []
+    for page in range(last_page):
+        result = requests.get(f "{URL}&pg={page+1}")
+        soup = BeautifulSoup(result.text, "html.parser")
+        results = soup.find_all("div", {"class": "-job"})
+        for result in results:
+            print(result["data-jobid"])
 
     def get_jobs():
         last_page = get_last_page()
-        return []
-
-
-# List in python 2021/08/22
-
-URL = f "https://stackoverfiow.com/jobs?q=python&sort=i"
-
-
-def get_last_page():
-    result = requests.get(URL)
-    soup = BeautifulSoup(result.text, "html.parser")
-    pages = soup.find("div", {"class": "pagination"}).find_all("a")
-    pages = pages[-2]
-    print(pages)
-
-    def get_jobs():
-        last_page = get_last_page()
-        return []
+        gobs = extract_jobs(last_page)
+        return jobs
