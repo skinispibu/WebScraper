@@ -337,6 +337,7 @@ def extract_jobs(last_page):
         soup = BeautifulSoup(result.text, "html.parser")
         results = soup.find_all("div", {"class": "-job"})
         for result in results:
+        print(extract_jobs)
 
     def get_jobs():
         last_page = get_last_page()
